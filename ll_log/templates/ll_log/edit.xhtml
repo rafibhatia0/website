@@ -1,0 +1,13 @@
+{% extends "ll_log/base.xhtml" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+  <form action="{% url 'll_log:edit' nest.id %}" method='post'>
+    {% csrf_token %}
+
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type="submit" content="add" %}
+  </form>
+
+{% endblock content %}

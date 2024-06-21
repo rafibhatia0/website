@@ -1,0 +1,27 @@
+{% extends 'll_log/base.xhtml' %}
+
+{% block page_header %}
+  <h1><a href="{%url 'll_log:entry' topic.id%}">{{ entry.text}}</a></h1>
+{% endblock page_header %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url 'll_log:new_nest' topic.id entry.id%}">Add new nest</a>
+  </p>
+
+  {% for nests in nest %}
+    <div class="card mb-1">
+      <!-- Card header with timestamp and edit link -->
+      <p class="card-header">
+        {{ nests.date_added|date:'M d, Y H:i' }}
+        <small><a href="{% url 'll_log:edit' nests.id %}">edit entry</a></small>
+      </p>
+      <!-- Card body with entry text -->
+      <div class="card-body">{{ nests.text|linebreaks }}</div>
+    </div>
+  {% empty %}
+    <p>There are no entries for this topic yet.</p>
+  {% endfor %}
+
+{% endblock content %}
